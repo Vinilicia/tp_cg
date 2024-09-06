@@ -23,52 +23,52 @@ GLUquadricObj *q;
 void initChao(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     // Inicializa display lists do chão
     glNewList(CHAO, GL_COMPILE); // Chão
-    glScalef(9.0, 0.1, 6.0);
     glTranslatef(0.0, 0.0, 0.0);
-    glutWireCube(10.0); // Cria um cubo representando o chão
+    glScalef(9.0, 0.1, 6.0);
+    glutSolidCube(10.0); // Cria um cubo representando o chão
     glEndList();
 }
 
 void initMesa(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     // Inicializa display lists da mesa
     glNewList(MESA, GL_COMPILE); // MESA
 
     glScalef(4.0, 0.1, 4.0);
-    glutWireCube(10.0); // Cria um cubo representando a parte de cima da mesa
+    glutSolidCube(10.0); // Cria um cubo representando a parte de cima da mesa
 
     // Pés da mesa, cada um é feito a partir de um cubo
         // Primeiro pé
         glPushMatrix();
         glTranslatef(-4.5, -40, 4.5);
         glScalef(0.5, 80.0, 0.5);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Segundo pé
         glPushMatrix();
         glTranslatef(4.5, -40, 4.5);
         glScalef(0.5, 80.0, 0.5);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Terceiro pé
         glPushMatrix();
         glTranslatef(4.5, -40, -4.5);
         glScalef(0.5, 80.0, 0.5);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Quarto pé
         glPushMatrix();
         glTranslatef(-4.5, -40, -4.5);
         glScalef(0.5, 80.0, 0.5);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
     glEndList();
@@ -76,7 +76,7 @@ void initMesa(void)
 
 void initTaca(void){
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     q = gluNewQuadric();
     // Inicializa display lists da Taça
     glNewList(TACA, GL_COMPILE); // Taça
@@ -108,7 +108,7 @@ void initTaca(void){
 
 void initGarrafaSemRolha(void){
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     q = gluNewQuadric();
     // Inicializa display lists da Garrafa
     glNewList(GARRAFA_SEM_ROLHA, GL_COMPILE); // Garrafa sem rolha
@@ -141,35 +141,13 @@ void initGarrafaSemRolha(void){
         glRotatef(90, 1, 0, 0);
         gluCylinder(q, 0.38, 0.4, 2.1, 10, 10);
         glPopMatrix();
-    
-    // Conteúdo cobrindo metade da garrafa
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glTranslatef(0, -2.7, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 1.2, 1.2, 2, 20, 20);
-        glPopMatrix();
-
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glTranslatef(0, -4.7, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.01, 1.2, 0.1, 20, 20);
-        glPopMatrix();
-
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glTranslatef(0, -2.7, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.01, 1.2, 0.1, 20, 20);
-        glPopMatrix();
 
     glEndList();
 }
 
 void initGarrafaComRolha(void){
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     q = gluNewQuadric();
     // Inicializa display lists da Garrafa
     glNewList(GARRAFA_COM_ROLHA, GL_COMPILE); // Garrafa com rolha
@@ -211,89 +189,55 @@ void initGarrafaComRolha(void){
         gluCylinder(q, 0.3, 0.01, 0.01, 10, 100); // Fechar a rolha
         glPopMatrix();
 
-    // Conteúdo cobrindo toda a garrafa
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 1.2, 1.2, 4.8, 20, 20);
-        glPopMatrix();
-
-        glPushMatrix();
-        glTranslatef(0, 0.4, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.4, 1.2, 0.4, 10, 6);
-        glPopMatrix();
-
-        glPushMatrix();
-        glTranslatef(0, 1.6, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.3, 0.3, 1.0, 10, 10);
-        glPopMatrix();
-
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glTranslatef(0, -4.7, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.01, 1.2, 0.1, 20, 20);
-        glPopMatrix();
-
-        glColor3f(0.9, 0.0, 1.0);
-        glPushMatrix();
-        glTranslatef(0, 1.6, 0);
-        glRotatef(90, 1, 0, 0);
-        gluCylinder(q, 0.01, 0.3, 0.05, 20, 20);
-        glPopMatrix();
-
-
     glEndList();
 }
 
 void initCadeira(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     // Inicializa display lists da cadeira
     glNewList(CADEIRA, GL_COMPILE); // cadeira
 
     // Todas as partes da cadeira são feitas a partir de cubos
 
     glScalef(3.5, 0.2, 4.0);
-    glutWireCube(2.0); // Cria um cubo representando o assento da cadeira
+    glutSolidCube(2.0); // Cria um cubo representando o assento da cadeira
 
     // Pés da cadeira
         // Primeiro pé
         glPushMatrix();
         glTranslatef(-0.8, -13, 0.8);
         glScalef(0.2, 28, 0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Segundo pé
         glPushMatrix();
         glTranslatef(0.8, -13, 0.8);
         glScalef(0.2, 28, 0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Terceiro pé
         glPushMatrix();
         glTranslatef(0.8, 7, -0.8);
         glScalef(0.2, 69, 0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
         // Quarto pé
         glPushMatrix();
         glTranslatef(-0.8, 7, -0.8);
         glScalef(0.2, 69, 0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
         glPopMatrix();
 
     // Encosto da cadeira
     glPushMatrix();
     glScalef(0.9, 11, 0.1);
     glTranslatef(0, 2.5, -8);
-    glutWireCube(2.0);
+    glutSolidCube(2.0);
     glPopMatrix();
 
     glEndList();
@@ -307,11 +251,13 @@ void init(void)
     initGarrafaComRolha();
     initGarrafaSemRolha();
     initCadeira();
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Mostrar Chão
         glColor3f(1.0, 1.0, 1.0);
@@ -454,7 +400,7 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1400, 800);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Trabalho CG");
